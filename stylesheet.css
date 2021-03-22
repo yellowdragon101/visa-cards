@@ -1,0 +1,17 @@
+#table {
+	font-size: 20px;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+thead {
+	border-bottom: solid 3px black;
+}
+
+td:first-child {
+	border-right: solid 3px black;
+}
+
+tfoot {
+	border-top: solid 3px black;
+}
