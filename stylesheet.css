@@ -15,3 +15,11 @@ td:first-child {
 tfoot {
 	border-top: solid 3px black;
 }
+
+.hidden {
+	display: none;
+}
+
+.red {
+	color: red;
+}

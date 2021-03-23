@@ -9,48 +9,50 @@ function spreadsheet() {
 	const card = document.getElementById("card").value;
 	const amount = parseFloat(document.getElementById("amount").value);
 
-	let output = document.getElementById("output");
-	if(card == "" || amount== "") {
-		output.textContent = "Fill out both fields.";
+	console.log(document.getElementById("amount").value, amount);
+	
+	const output = document.getElementById("output");
+	if(card != "" && (!isNaN(amount) || amount == 0)) {
+		if(!output.classList.contains("hidden")) output.classList.add("hidden");
+		for(i in cards) {
+			if(card == cards[i][0]) {
+				cards[i][1] = amount;
+				populateTable();
+				return;
+			}
+		}
+		cards.push([card, amount]);
+		populateTable();
+	}
+	else {
+		output.classList.remove("hidden");
 		return;
 	}
-	output.textContent = "";
-
-	for(i in cards) {
-		if(card == cards[i][0]) {
-			cards[i][1] = amount;
-			fillTable();
-			return;
-		}
-	}
-	cards.push([card, amount]);
-	fillTable();
 }
 
-function fillTable() {
+function populateTable() {
 	cards.sort(function(a,b) {
-		return a[1]+b[1]
+		return b[1]-a[1]
 	});
 
 	document.getElementById("tbody").innerHTML = "";
 	let total = 0;
 	for(i in cards) {
-		addCard(cards[i][0], formatter.format(cards[i][1]));
+		addCell(cards[i][0], formatter.format(cards[i][1]));
 		total += cards[i][1];
-		console.log(cards[i][1], formatter.format(cards[i][1]))
 	}
 	total = formatter.format(total);
 	document.getElementById("total").textContent = total;
 }
 
-function addCard(card, amount) {
+function addCell(card, amount) {
 	const table = document.getElementById("tbody");
 	const row = table.insertRow();
 	const cell = row.insertCell();
-	const cell2 = row.insertCell();
 	const cardTxt = document.createTextNode(card);
-	const amountTxt = document.createTextNode(amount);
 	cell.appendChild(cardTxt);
+	const cell2 = row.insertCell();
+	const amountTxt = document.createTextNode(amount);
 	cell2.appendChild(amountTxt);
 }
 
