@@ -8,8 +8,6 @@ const formatter = new Intl.NumberFormat('en-US', {
 function spreadsheet() {
 	const card = document.getElementById("card").value;
 	const amount = parseFloat(document.getElementById("amount").value);
-
-	console.log(document.getElementById("amount").value, amount);
 	
 	const output = document.getElementById("output");
 	if(card != "" && (!isNaN(amount) || amount == 0)) {
